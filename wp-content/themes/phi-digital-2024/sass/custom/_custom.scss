@@ -1,0 +1,192 @@
+@font-face {
+  font-family: "Gilroy";
+  src: url("fonts/Gilroy-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: "Merrieather";
+  src: url("fonts/Merriweather-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: "Merrieather";
+  src: url("fonts/Merriweather-Italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: optional;
+}
+
+:root {
+  font-family: "Merriweather", Charter, "Bitstream Charter", "Sitka Text",
+    Cambria, serif;
+  font-size: 16px;
+  --white: #fff;
+  --navy: #1e374c;
+  --blue: #005ddf;
+  --blue-light: color-mix(in srgb, var(--blue), var(--white) 25%);
+  --stone: #eae6e1;
+  --orange: #ff9810;
+  --orange-light: color-mix(in srgb, var(--orange), var(--white) 25%);
+}
+
+body {
+  margin: 0 !important;
+}
+
+#page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  margin: 0;
+
+  #masthead {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .site-branding,
+    .site-branding a {
+      font-size: 0;
+      line-height: 0;
+    }
+
+    #site-navigation {
+      width: auto;
+    }
+  }
+
+  #primary {
+    flex: 1;
+  }
+
+  * {
+    font-family: "Merriweather", Charter, "Bitstream Charter", "Sitka Text",
+      Cambria, serif;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-family: Gilroy, Avenir, Montserrat, Corbel, "URW Gothic",
+      source-sans-pro, sans-serif;
+    font-weight: 800;
+    font-size: 4rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-family: Gilroy, Avenir, Montserrat, Corbel, "URW Gothic",
+      source-sans-pro, sans-serif;
+    font-weight: 800;
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: "Merriweather", Charter, "Bitstream Charter", "Sitka Text",
+      Cambria, serif;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  h4 {
+    font-family: Gilroy, Avenir, Montserrat, Corbel, "URW Gothic",
+      source-sans-pro, sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  button,
+  a.button {
+    font-family: Gilroy, Avenir, Montserrat, Corbel, "URW Gothic",
+      source-sans-pro, sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  * {
+    color: var(--navy);
+  }
+
+  .inverse {
+    * {
+      color: var(--stone);
+    }
+  }
+
+  a,
+  a:active,
+  a:visited {
+    color: var(--blue);
+    transition: all 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--blue-light);
+  }
+
+  #svg_logo {
+    height: 3.5rem;
+
+    #shape_1,
+    .logo_letter {
+      fill: var(--stone);
+    }
+
+    #shape_2 {
+      fill: var(--orange);
+    }
+
+    #logo_group_1 {
+      transform-origin: 18.25% 50%;
+      transition: transform 0.35s ease-in;
+    }
+
+    #logo_group_2 {
+      transition: transform 0.35s ease-in-out;
+    }
+
+    &:hover {
+      #logo_group_1 {
+        transform: rotate(180deg);
+      }
+      #logo_group_2 {
+        transform: translate(3.03%, 0);
+      }
+    }
+  }
+
+  .section {
+    width: 100%;
+    height: 500px;
+  }
+
+  #section_1,
+  #section_4 {
+    background-color: var(--blue);
+  }
+
+  #section_2,
+  #section_5 {
+    background-color: var(--stone);
+  }
+
+  #section_3 {
+    background-color: var(--orange);
+  }
+}
+
+.logged-in.admin-bar #page {
+  min-height: calc(100dvh - 32px);
+}
