@@ -2,43 +2,39 @@
 get_header();
 ?>
 <main id="primary" class="site-main">
-	<!--<div id="section_1" class="section"></div>
-	<div id="section_2" class="section"></div>
-	<div id="section_3" class="section"></div>
-	<div id="section_4" class="section"></div>
-	<div id="section_5" class="section"></div>-->
-	<?php
-	if (have_posts()) :
 
-		if (is_home() && !is_front_page()) :
-	?>
-			<header>
-				<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-			</header>
-	<?php
-		endif;
+	<section id="home-hero" class="hero blue">
+		<div id="hero-container" class="fade-in-bottom">
+			<div id="hero-header">
+				<h1>We Create</h1>
+				<div id="hero-dropdown">
+					<h1 id="hero-dropdown-selected">&nbsp</h1>
+					<div id="hero-dropdown-caret-down" class="shake-vertical"><?php include get_stylesheet_directory() . '/svg/caret-down.svg'; ?></div>
+					<ul id="hero-dropdown-selections">
+						<li>
+							<h1>brilliant</h1>
+						</li>
+						<li>
+							<h1>bespoke</h1>
+						</li>
+						<li>
+							<h1>beautiful</h1>
+						</li>
+					</ul>
+				</div>
+				<h1>Websites</h1>
+			</div>
+		</div>
+		<div id="hero-scroll" class="fade-in-bottom">
+			<a href="#recent-work" class="no-dec" title="scroll down">
+				<?php include get_stylesheet_directory() . '/svg/caret-down.svg'; ?>
+			</a>
+		</div>
+	</section>
+	<section id="recent-work" class="" style="height:800px"></section>
+	<section id="services" class="" style="height:800px"></section>
+	<section id="get-in-touch" class="" style="height:800px"></section>
 
-		/* Start the Loop */
-		while (have_posts()) :
-			the_post();
-
-			/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-			get_template_part('template-parts/content', get_post_type());
-
-		endwhile;
-
-		the_posts_navigation();
-
-	else :
-
-		get_template_part('template-parts/content', 'none');
-
-	endif;
-	?>
 
 </main><!-- #main -->
 

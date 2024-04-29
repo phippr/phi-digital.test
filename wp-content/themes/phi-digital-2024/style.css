@@ -952,6 +952,7 @@ textarea {
   --stone: #eae6e1;
   --orange: #ff9810;
   --orange-light: color-mix(in srgb, var(--orange), var(--white) 25%);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -971,6 +972,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
+  z-index: 1;
 }
 #page #masthead .site-branding,
 #page #masthead .site-branding a {
@@ -979,6 +981,28 @@ body {
 }
 #page #masthead #site-navigation {
   width: auto;
+}
+#page #masthead #site-navigation #primary-menu .nav-menu li a {
+  font-family: Gilroy, Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--stone);
+  transition: all 0.1s ease;
+  border-bottom: 0 solid var(--orange);
+}
+#page #masthead #site-navigation #primary-menu .nav-menu li a::after {
+  content: "";
+  background-color: var(--orange);
+  height: 3px;
+  width: 0;
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+}
+#page #masthead #site-navigation #primary-menu .nav-menu li a:hover::after {
+  width: 100%;
 }
 #page #primary {
   flex: 1;
@@ -993,23 +1017,27 @@ body {
   font-weight: 800;
   font-size: 4rem;
   line-height: 1.2;
+  margin: 0;
 }
 #page h2 {
   font-family: Gilroy, Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
   font-weight: 800;
   font-size: 3rem;
   line-height: 1.2;
+  margin: 0;
 }
 #page h3 {
   font-family: "Merriweather", Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
   font-size: 2rem;
   line-height: 1.2;
+  margin: 0;
 }
 #page h4 {
   font-family: Gilroy, Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
   font-weight: 800;
   font-size: 1.5rem;
   line-height: 1.2;
+  margin: 0;
 }
 #page button,
 #page a.button {
@@ -1020,9 +1048,6 @@ body {
 }
 #page * {
   color: var(--navy);
-}
-#page .inverse * {
-  color: var(--stone);
 }
 #page a,
 #page a:active,
@@ -1056,20 +1081,167 @@ body {
 #page #svg_logo:hover #logo_group_2 {
   transform: translate(3.03%, 0);
 }
-#page .section {
-  width: 100%;
-  height: 500px;
-}
-#page #section_1,
-#page #section_4 {
+#page .blue {
   background-color: var(--blue);
 }
-#page #section_2,
-#page #section_5 {
-  background-color: var(--stone);
+#page .blue * {
+  color: var(--stone);
 }
-#page #section_3 {
-  background-color: var(--orange);
+#page .hero {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+#page #home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("svg/blue-background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+#page #home-hero #hero-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#page #home-hero #hero-container #hero-header {
+  display: flex;
+}
+#page #home-hero #hero-container #hero-header h1 {
+  display: inline-block;
+}
+#page #home-hero #hero-container #hero-header .scale-in-hor-center {
+  width: 0;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown {
+  border-bottom: 3px solid var(--orange);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 0;
+  white-space: nowrap;
+  visibility: hidden;
+  margin: 0 0.6rem;
+  padding: 0 0.6rem;
+  cursor: pointer;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown:hover .shake-vertical, #page #home-hero #hero-container #hero-header #hero-dropdown.clicked .shake-vertical {
+  animation: none;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown #hero-dropdown-selected {
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown #hero-dropdown-caret-down {
+  position: relative;
+  top: calc(50% - 1.5rem);
+  padding-left: 0.6rem;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown #hero-dropdown-caret-down #svg-caret-down {
+  fill: var(--stone);
+  height: 3rem;
+  width: auto;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown #hero-dropdown-selections {
+  display: none;
+  position: absolute;
+  top: calc(100% + 2.5px);
+  background: var(--stone);
+  left: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  box-shadow: 0px 15px 25px -4px rgba(102, 102, 102, 0.4);
+  border-radius: 0 0 1rem 1rem;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown #hero-dropdown-selections li {
+  margin: 0;
+  padding: 0.5rem 1.2rem;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown #hero-dropdown-selections li h1 {
+  color: var(--navy);
+  transition: all 0.3s ease-in-out;
+  line-height: 1;
+}
+#page #home-hero #hero-container #hero-header #hero-dropdown #hero-dropdown-selections li:hover h1 {
+  color: var(--orange);
+}
+#page #home-hero #hero-scroll {
+  font-size: 0;
+}
+#page #home-hero #hero-scroll a {
+  font-size: 0;
+}
+#page #home-hero #hero-scroll a #svg-caret-down {
+  width: 3rem;
+  height: auto;
+  fill: var(--stone);
+}
+#page .fade-in-bottom {
+  animation: fade-in-bottom 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+@keyframes fade-in-bottom {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+#page .scale-in-hor-center {
+  animation: scale-in-hor-center 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s both;
+}
+@keyframes scale-in-hor-center {
+  0% {
+    width: 0;
+    visibility: hidden;
+    opacity: 1;
+  }
+  75% {
+    width: 110%;
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+#page .shake-vertical {
+  animation: shake-vertical 4s linear 2s infinite normal none;
+}
+@keyframes shake-vertical {
+  0%, 56%, 100% {
+    transform: translateY(0);
+  }
+  62%, 87% {
+    transform: translateY(-4px);
+  }
+  68%, 81% {
+    transform: translateY(6.4px);
+  }
+  75% {
+    transform: translateY(-8px);
+  }
+  94% {
+    transform: translateY(2.4px);
+  }
+}
+
+#ecor5OVMQqP1 {
+  transform: translateZ(0);
 }
 
 .logged-in.admin-bar #page {

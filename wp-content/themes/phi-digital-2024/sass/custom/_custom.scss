@@ -33,6 +33,7 @@
   --stone: #eae6e1;
   --orange: #ff9810;
   --orange-light: color-mix(in srgb, var(--orange), var(--white) 25%);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -52,6 +53,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
+    z-index: 1;
 
     .site-branding,
     .site-branding a {
@@ -61,6 +63,38 @@ body {
 
     #site-navigation {
       width: auto;
+
+      #primary-menu {
+        .nav-menu {
+          li {
+            a {
+              font-family: Gilroy, Avenir, Montserrat, Corbel, "URW Gothic",
+                source-sans-pro, sans-serif;
+              font-weight: 800;
+              font-size: 1.5rem;
+              line-height: 1;
+              color: var(--stone);
+              transition: all 0.1s ease;
+              border-bottom: 0 solid var(--orange);
+
+              &::after {
+                content: "";
+                background-color: var(--orange);
+                height: 3px;
+                width: 0;
+                position: absolute;
+                top: 1.5rem;
+                left: 0;
+                transition: all 0.3s ease-in-out;
+              }
+
+              &:hover::after {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -81,6 +115,7 @@ body {
     font-weight: 800;
     font-size: 4rem;
     line-height: 1.2;
+    margin: 0; //TODO
   }
 
   h2 {
@@ -89,6 +124,7 @@ body {
     font-weight: 800;
     font-size: 3rem;
     line-height: 1.2;
+    margin: 0; //TODO
   }
 
   h3 {
@@ -96,6 +132,7 @@ body {
       Cambria, serif;
     font-size: 2rem;
     line-height: 1.2;
+    margin: 0; //TODO
   }
 
   h4 {
@@ -104,6 +141,7 @@ body {
     font-weight: 800;
     font-size: 1.5rem;
     line-height: 1.2;
+    margin: 0; //TODO
   }
 
   button,
@@ -117,12 +155,6 @@ body {
 
   * {
     color: var(--navy);
-  }
-
-  .inverse {
-    * {
-      color: var(--stone);
-    }
   }
 
   a,
@@ -167,24 +199,274 @@ body {
     }
   }
 
-  .section {
-    width: 100%;
-    height: 500px;
-  }
-
-  #section_1,
-  #section_4 {
+  .blue {
     background-color: var(--blue);
+
+    * {
+      color: var(--stone);
+    }
   }
 
-  #section_2,
-  #section_5 {
-    background-color: var(--stone);
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
   }
 
-  #section_3 {
-    background-color: var(--orange);
+  #home-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url("svg/blue-background.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    #hero-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      #hero-header {
+        display: flex;
+        h1 {
+          display: inline-block;
+        }
+
+        .scale-in-hor-center {
+          width: 0;
+        }
+
+        #hero-dropdown {
+          border-bottom: 3px solid var(--orange);
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          width: 0;
+          white-space: nowrap;
+          //flex: 1;
+          visibility: hidden;
+          margin: 0 0.6rem;
+          padding: 0 0.6rem;
+          cursor: pointer;
+          //overflow: hidden;
+          position: relative;
+          //transition: width 1s ease;
+          align-items: center;
+          justify-content: space-between;
+
+          &:hover .shake-vertical,
+          &.clicked .shake-vertical {
+            animation: none;
+          }
+
+          #hero-dropdown-selected {
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+          }
+
+          #hero-dropdown-caret-down {
+            position: relative;
+            top: calc(50% - 1.5rem);
+            //right: 0.3rem;
+            padding-left: 0.6rem;
+
+            #svg-caret-down {
+              fill: var(--stone);
+              height: 3rem;
+              width: auto;
+            }
+          }
+
+          #hero-dropdown-selections {
+            display: none;
+            position: absolute;
+            top: calc(100% + 2.5px);
+            background: var(--stone);
+            left: 0;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-align: center;
+            box-shadow: 0px 15px 25px -4px rgba(102, 102, 102, 0.4);
+            border-radius: 0 0 1rem 1rem;
+
+            li {
+              margin: 0;
+              padding: 0.5rem 1.2rem;
+
+              h1 {
+                color: var(--navy);
+                transition: all 0.3s ease-in-out;
+                line-height: 1;
+              }
+
+              &:hover h1 {
+                color: var(--orange);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    #hero-scroll {
+      font-size: 0;
+      a {
+        font-size: 0;
+        #svg-caret-down {
+          width: 3rem;
+          height: auto;
+          fill: var(--stone);
+        }
+      }
+    }
   }
+
+  .fade-in-bottom {
+    -webkit-animation: fade-in-bottom 0.8s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+    animation: fade-in-bottom 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
+
+  @-webkit-keyframes fade-in-bottom {
+    0% {
+      -webkit-transform: translateY(40px);
+      transform: translateY(40px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in-bottom {
+    0% {
+      -webkit-transform: translateY(40px);
+      transform: translateY(40px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .scale-in-hor-center {
+    -webkit-animation: scale-in-hor-center 0.8s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s both;
+    animation: scale-in-hor-center 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      0.9s both;
+  }
+
+  @-webkit-keyframes scale-in-hor-center {
+    0% {
+      width: 0;
+      visibility: hidden;
+      opacity: 1;
+    }
+    75% {
+      width: 110%;
+      visibility: visible;
+      opacity: 1;
+    }
+    100% {
+      width: 100%;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale-in-hor-center {
+    0% {
+      width: 0;
+      visibility: hidden;
+      opacity: 1;
+    }
+    75% {
+      width: 110%;
+      visibility: visible;
+      opacity: 1;
+    }
+    100% {
+      width: 100%;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .shake-vertical {
+    -webkit-animation: shake-vertical 4s linear 2s infinite normal none;
+    animation: shake-vertical 4s linear 2s infinite normal none;
+  }
+
+  @-webkit-keyframes shake-vertical {
+    0%,
+    56%,
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    62%,
+    87% {
+      -webkit-transform: translateY(-4px);
+      transform: translateY(-4px);
+    }
+    68%,
+    81% {
+      -webkit-transform: translateY(6.4px);
+      transform: translateY(6.4px);
+    }
+    75% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+    }
+    94% {
+      -webkit-transform: translateY(2.4px);
+      transform: translateY(2.4px);
+    }
+  }
+
+  @keyframes shake-vertical {
+    0%,
+    56%,
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    62%,
+    87% {
+      -webkit-transform: translateY(-4px);
+      transform: translateY(-4px);
+    }
+    68%,
+    81% {
+      -webkit-transform: translateY(6.4px);
+      transform: translateY(6.4px);
+    }
+    75% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+    }
+    94% {
+      -webkit-transform: translateY(2.4px);
+      transform: translateY(2.4px);
+    }
+  }
+
+  //TODO
+  //BOUNCE TOO VIGOUROUS
+  //WEBKIT PREFIX
+  //OFFSET TOP
+}
+
+#ecor5OVMQqP1 {
+  transform: translateZ(0);
 }
 
 .logged-in.admin-bar #page {
